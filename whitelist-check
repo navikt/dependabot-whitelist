@@ -12,12 +12,14 @@ GREEN='\033[0;32m'
 NOCOLOR='\033[0m'
 
 if [[ -z "$1" ]]; then
-  echo "Whitelist was empty"
+  echo -e "$RED Whitelist was empty $NOCOLOR $DEP"
+  echo "$1"
   exit 1
 fi
 
 if [[ -z "$2" ]]; then
-  echo "Dependencies was empty"
+  echo -e "$RED Dependencies was empty $NOCOLOR $DEP"
+  echo "$2"
   exit 1
 fi
 
