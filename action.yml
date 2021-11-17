@@ -34,19 +34,25 @@ runs:
         github-token: ${{ inputs.token }}
 
     - name: Fail if major and not whitelisted
-      if: ${{ inputs.semver-major == 'false' }} && ${{ steps.metadata.outputs.update-type == 'version-update:semver-major' }}
+      if: ${{ inputs.major == 'false' }} && ${{ steps.metadata.outputs.update-type == 'version-update:semver-major' }}
       shell: sh
-      run: exit 1
+      run: |
+        echo "major version stopped"
+        exit 1
 
     - name: Fail if minor and not whitelisted
-      if: ${{ inputs.semver-minor == 'false' }} && ${{ steps.metadata.outputs.update-type == 'version-update:semver-minor' }}
+      if: ${{ inputs.minor == 'false' }} && ${{ steps.metadata.outputs.update-type == 'version-update:semver-minor' }}
       shell: sh
-      run: exit 1
+      run: |
+        echo "minor version stopped"
+        exit 1
 
     - name: Fail if patch and not whitelisted
-      if: ${{ inputs.semver-patch == 'false' }} && ${{ steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
+      if: ${{ inputs.patch == 'false' }} && ${{ steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
       shell: sh
-      run: exit 1
+      run: |
+        echo "patch version stopped"
+        exit 1
 
-    - run: ${{ github.action_path }}/whitelist-check ${{ inputs.whitelist }} ${{ steps.metadata.outputs.dependency-names }}
+    - run: bash ${{ github.action_path }}/whitelist-check '${{ inputs.whitelist }}' '${{ steps.metadata.outputs.dependency-names }}'
       shell: bash
