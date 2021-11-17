@@ -38,3 +38,5 @@ for DEP in "${DEPENDENCIES[@]}"; do
   fi
 
 done
+
+exit 0
