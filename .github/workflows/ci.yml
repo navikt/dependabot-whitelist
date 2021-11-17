@@ -9,7 +9,7 @@ jobs:
 
       - name: All dependencies are whitelisted
         env:
-          whitelist: |
+          whitelist: |-
             a
             b
             c
