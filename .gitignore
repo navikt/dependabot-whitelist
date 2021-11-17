@@ -1,0 +1,9 @@
+# Idea project files
+*.iml
+.idea/
+!.idea/codeStyles/
+.run
+
+# OS specific
+.DS_Store
+.devcontainer
