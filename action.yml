@@ -34,7 +34,7 @@ runs:
         github-token: ${{ inputs.token }}
 
     - name: Fail if major and not whitelisted
-      if: ${{ inputs.major == 'false' }} && ${{ steps.metadata.outputs.update-type == 'version-update:semver-major' }}
+      if: inputs.major == 'false' && steps.metadata.outputs.update-type == 'version-update:semver-major'
       shell: sh
       run: |
         echo "major version stopped"
