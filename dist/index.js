@@ -1555,23 +1555,6 @@ exports.debug = debug; // for test
 
 /***/ }),
 
-/***/ 258:
-/***/ ((module) => {
-
-let wait = function (milliseconds) {
-    return new Promise((resolve) => {
-        if (typeof milliseconds !== 'number') {
-            throw new Error('milliseconds not a number');
-        }
-        setTimeout(() => resolve("done!"), milliseconds)
-    });
-};
-
-module.exports = wait;
-
-
-/***/ }),
-
 /***/ 491:
 /***/ ((module) => {
 
@@ -1694,20 +1677,24 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(186);
-const wait = __nccwpck_require__(258);
 
-
-// most @actions toolkit packages have async methods
 async function run() {
     try {
-        const ms = core.getInput('milliseconds');
-        core.info(`Waiting ${ms} milliseconds ...`);
+        const whitelist = core
+            .getInput('dependencies', {required: true})
+            .split('/n');
 
-        core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-        await wait(parseInt(ms));
-        core.info((new Date()).toTimeString());
+        const dependencies = core
+            .getInput('dependencies', {required: true})
+            .split(',');
 
-        core.setOutput('time', new Date().toTimeString());
+        dependencies.forEach(dep => {
+            if (whitelist.includes(dep)) {
+                core.info('Dependency ${dep} is whitelisted.');
+            } else {
+                core.setFailed('Dependency ${dep} is not whitelisted.')
+            }
+        });
     } catch (error) {
         core.setFailed(error.message);
     }

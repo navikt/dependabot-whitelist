@@ -1,18 +1,22 @@
 const core = require('@actions/core');
-const wait = require('./wait');
 
-
-// most @actions toolkit packages have async methods
 async function run() {
     try {
-        const ms = core.getInput('milliseconds');
-        core.info(`Waiting ${ms} milliseconds ...`);
+        const whitelist = core
+            .getInput('whitelist', {required: true})
+            .split('/n');
 
-        core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-        await wait(parseInt(ms));
-        core.info((new Date()).toTimeString());
+        const dependencies = core
+            .getInput('dependencies', {required: true})
+            .split(',');
 
-        core.setOutput('time', new Date().toTimeString());
+        dependencies.forEach(dep => {
+            if (whitelist.includes(dep)) {
+                core.info('Dependency ${dep} is whitelisted.');
+            } else {
+                core.setFailed('Dependency ${dep} is not whitelisted.')
+            }
+        });
     } catch (error) {
         core.setFailed(error.message);
     }
