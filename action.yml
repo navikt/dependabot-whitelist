@@ -41,14 +41,14 @@ runs:
         exit 1
 
     - name: Fail if minor and not whitelisted
-      if: ${{ inputs.minor == 'false' }} && ${{ steps.metadata.outputs.update-type == 'version-update:semver-minor' }}
+      if: inputs.minor == 'false' && steps.metadata.outputs.update-type == 'version-update:semver-minor'
       shell: sh
       run: |
         echo "minor version stopped"
         exit 1
 
     - name: Fail if patch and not whitelisted
-      if: ${{ inputs.patch == 'false' }} && ${{ steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
+      if: inputs.patch == 'false' && steps.metadata.outputs.update-type == 'version-update:semver-patch'
       shell: sh
       run: |
         echo "patch version stopped"
