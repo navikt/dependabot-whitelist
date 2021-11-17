@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # 1st arg (string) is the whitelist, newline-separated
 # 2nd arg (string) is the dependencies to test, comma-separated

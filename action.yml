@@ -1,7 +1,7 @@
 name: Dependabot Whitelist
 description: Check whitelisted dependencies.
 inputs:
-  dependencies:
+  whitelist:
     description: A whitelist of dependencies as a multi-line string with newline separator
     required: true
     default: ''
@@ -48,5 +48,5 @@ runs:
       shell: sh
       run: exit 1
 
-    - run: ${{ github.action_path }}/whitelist-check ${{ inputs.dependencies }} ${{ steps.metadata.outputs.dependency-names }}
+    - run: ${{ github.action_path }}/whitelist-check ${{ inputs.whitelist }} ${{ steps.metadata.outputs.dependency-names }}
       shell: bash
