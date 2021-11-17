@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# 1st arg (string) is the whitelist, newline-separated
+# 2nd arg (string) is the dependencies to test, comma-separated
+#
+# Example usage:
+# ./whitelist-check a\nb\nc a,c,d
+
 # COLORS
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -15,10 +21,10 @@ if [[ -z "$2" ]]; then
   exit 1
 fi
 
-# Multi-line string separated by newline
+# 1st arg
 IFS=$'\n' read -rd '' -a WHITELIST <<<"$1"
 
-# Multi-line string separated by comma
+# 2nd arg
 IFS=',' read -ra DEPENDENCIES <<<"$2"
 
 for DEP in "${DEPENDENCIES[@]}"; do
