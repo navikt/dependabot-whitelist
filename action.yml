@@ -21,10 +21,6 @@ inputs:
     description: Github API Access Token
     required: false
     default: ${{ github.token }}
-outputs:
-  result:
-    description: Result of the whitelist check
-    value: ${{ steps.dependabot-whitelist.outputs.result }}
 runs:
   using: composite
   steps:
