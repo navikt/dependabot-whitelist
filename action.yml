@@ -28,7 +28,7 @@ outputs:
 runs:
   using: composite
   steps:
-    - uses: dependabot/fetch-metadata@v1.1.1
+    - uses: dependabot/fetch-metadata@v1.0.3
       id: metadata
       with:
         github-token: ${{ inputs.token }}
