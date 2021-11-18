@@ -1,5 +1,5 @@
 name: Dependabot Whitelist
-description: Check whitelisted dependencies.
+description: Check whitelisted dependencies and versions
 inputs:
   whitelist:
     description: A whitelist of dependencies as a multi-line string with newline separator
