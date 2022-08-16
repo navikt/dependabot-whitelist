@@ -13,6 +13,7 @@ jobs:
         with:
           whitelist: |
             actions/checkout
+            dependabot/fetch-metadata
 
       - name: Auto-merge
         run: gh pr merge --auto --merge "$PR_URL"
