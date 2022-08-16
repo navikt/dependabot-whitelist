@@ -6,7 +6,8 @@ permissions:
 jobs:
   dependabot:
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'
+    # Only allow dependabot from this repo and not via forks
+    if: github.actor == 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
     steps:
       - uses: actions/checkout@v2.4.0
       - uses: ./
@@ -15,8 +16,7 @@ jobs:
             actions/checkout
             dependabot/fetch-metadata
 
-      - name: Auto-merge
-        run: gh pr merge --auto --merge "$PR_URL"
+      - run: gh pr merge --auto --merge "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

@@ -1,9 +1,8 @@
-name: CI
+name: Test
 on: [ push, pull_request ]
 jobs:
-  test-script:
+  whitelist-check:
     runs-on: ubuntu-latest
-    name: Tests the whitelist-check script
     steps:
       - uses: actions/checkout@v2.4.0
 
