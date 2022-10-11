@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  workflow_run:
+    workflows: [ 'Auto Merge dependabot' ]
+    types: [ completed ]
+    branches: [ 'dependabot/**' ]
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # include tags
+
+      - uses: paulhatch/semantic-version@v4.0.3
+        id: tag
+        with:
+          bump_each_commit: true
+          tag_prefix: ""
+
+      - id: notes
+        run: |
+          text="$(git --no-pager log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%h %s")"
+          echo "::set-output name=CHANGELOG::$text"
+
+      - uses: actions/create-release@v1.1.4
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag.outputs.version }}
+          release_name: ${{ steps.tag.outputs.version }}
+          body: |
+            Changelog 🚧
+            ${{ steps.notes.outputs.CHANGELOG }}
