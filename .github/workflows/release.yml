@@ -19,7 +19,7 @@ jobs:
         id: tag
         with:
           bump_each_commit: true
-          tag_prefix: ""
+          tag_prefix: "v"
 
       - id: notes
         run: |
