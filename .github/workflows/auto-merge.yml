@@ -9,7 +9,7 @@ jobs:
     # Only allow dependabot from this repo and not via forks
     if: github.actor == 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
     steps:
-      - uses: actions/checkout@v3.2.0
+      - uses: actions/checkout@v3.3.0
       - uses: ./
         with:
           major: 'true'
