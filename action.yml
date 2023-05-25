@@ -24,7 +24,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: dependabot/fetch-metadata@v1.5.0
+    - uses: dependabot/fetch-metadata@v1.5.1
       id: metadata
       with:
         github-token: ${{ inputs.token }}
