@@ -16,6 +16,7 @@ jobs:
           whitelist: |
             actions/checkout
             dependabot/fetch-metadata
+            paulhatch/semantic-version
 
       - run: gh pr merge --auto --merge "$PR_URL"
         env:
