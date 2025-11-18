@@ -4,7 +4,7 @@ jobs:
   whitelist-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v5.0.1
 
       - name: All dependencies are whitelisted
         run: bash whitelist-check '${{ env.whitelist }}' '${{ env.dependencies }}'
